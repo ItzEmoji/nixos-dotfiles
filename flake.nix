@@ -14,6 +14,7 @@
 outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = "nixpkgs.legacyPackages.${system}";
     in {
       nixosConfigurations.cyril-nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -24,7 +25,10 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.cyril = {
-              imports = [ ./home.nix ];
+              imports = [
+                ./home.nix
+                ./config/stylix/stylix-system.nix
+              ];
             };
 
             home-manager.useGlobalPkgs = true;
@@ -32,7 +36,20 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
             home-manager.backupFileExtension = "backup";
           }
         ];
+      };
+      homeConfigurations.cyril = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home.nix
 
+          {
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+          }
+        ];
       };
     };
 }
