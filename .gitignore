@@ -1,0 +1,3 @@
+secrets.nix
+config/grub/grub.nix
+config/grub/themes/*
