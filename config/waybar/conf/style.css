@@ -1,0 +1,67 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "FiraCode Nerd Font SemBd", "sans-serif";
+    font-size: 15px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* The main capsule */
+.modules-center {
+    background-color: #101213; /* $bg-color */
+    color: #fff; /* $fg-color */
+    border-radius: 14px; /* $rounded */
+    margin: 5
+}
+
+/* General module styling and separators */
+#waybar > box > .horizontal > * > * {
+    padding: 0 12px;
+    margin: 4px 0;
+}
+
+#waybar > box > .horizontal > * > *:not(:first-child) {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- Workspace Button Styling --- */
+#workspaces button {
+    background-color: #6791c9; /* $accent - ALL dots are now blue by default */
+    color: transparent;
+    border-radius: 50%; /* Ensures a perfect circle */
+    margin: 5px;
+    min-height: 12px;
+    min-width: 12px;
+    transition: all 0.15s ease-out;
+}
+
+#workspaces button.active {
+    background-color: #6791c9; /* Stays blue */
+    min-width: 30px;      /* Becomes wider */
+    border-radius: 12px;  /* Pill shape */
+}
+
+#clock {
+    padding: 10px 12px;
+}
+
+
+/* --- Other Module Styling --- */
+#custom-nix_logo {
+    font-size: 22px;
+    color: #6791c9; /* $accent */
+    padding-right: 15px;
+}
+
+#custom-user_menu {
+    font-size: 22px;
+    color: #6791c9; /* $accent */
+    border-radius: 14px; /* $rounded */
+    margin: 4px 6px 4px 0;
+    padding: 0 14px;
+    border-left: none;
+}
