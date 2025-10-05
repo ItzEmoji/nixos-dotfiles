@@ -33,6 +33,9 @@
     alacritty
     vivaldi
     ripgrep
+    cmatrix
+    cava
+    pipes
     vesktop
     nil
     nixfmt
