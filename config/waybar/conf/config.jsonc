@@ -1,0 +1,29 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+
+    "modules-left": [],
+    "modules-center": [
+        "custom/nix_logo",
+        "hyprland/workspaces",
+        "clock",
+        "custom/user_menu"
+    ],
+
+    "modules-right": [],
+
+    // --- Module Definitions ---
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "occupied": ""
+        }
+    },
+
+    "custom/nix_logo": { "format": "", "tooltip": false },
+    "clock": { "format": "{:%H:%M}" },
+    "custom/user_menu": { "format": "😎" }
+}

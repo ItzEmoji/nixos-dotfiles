@@ -1,0 +1,172 @@
+version = 2
+final_space = true
+
+[[blocks]]
+alignment = "left"
+type = "prompt"
+
+
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "yellow"
+leading_diamond = ""
+style = "diamond"
+template = "{{ .UserName }}"
+trailing_diamond = " "
+type = "session"
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "green"
+leading_diamond = ""
+style = "diamond"
+template = " {{ .Path }}"
+trailing_diamond = ""
+type = "path"
+
+[blocks.segments.properties]
+style = "folder"
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "blue"
+leading_diamond = " "
+style = "diamond"
+template = "{{ .HEAD }}"
+trailing_diamond = ""
+type = "git"
+
+[blocks.segments.properties]
+branch_icon = ""
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#154de7"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
+type = "python"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#7FD5EA"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
+type = "go"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#42E66C"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
+trailing_diamond = ""
+type = "node"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#E64747"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
+type = "ruby"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#E64747"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
+type = "java"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#9B6BDF"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+trailing_diamond = ""
+type = "julia"
+
+[blocks.segments.properties]
+fetch_version = false
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#9B6BDF"
+foreground_templates = [
+    "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}",
+    "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}",
+    "{{if eq \"Full\" .State.String}}#4caf50{{end}}",
+]
+leading_diamond = " "
+style = "diamond"
+template = "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}"
+trailing_diamond = ""
+type = "battery"
+
+[blocks.segments.properties]
+charged_icon = " "
+charging_icon = "⇡ "
+discharging_icon = "⇣ "
+
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "lightYellow"
+leading_diamond = ""
+style = "diamond"
+template = "{{ .FormattedMs }}"
+trailing_diamond = " "
+type = "executiontime"
+
+[blocks.segments.properties]
+style = "austin"
+threshold = 150
+[[blocks]]
+alignment = "left"
+newline = true
+type = "prompt"
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "blue"
+leading_diamond = ""
+style = "diamond"
+template = "❯"
+trailing_diamond = ""
+type = "text"
+
+[transient_prompt]
+foreground_templates = [
+    "{{if gt .Code 0}}red{{end}}",
+    "{{if eq .Code 0}}blue{{end}}",
+]
+background = 'transparent'
+template = '❯ '
+
+[secondary_prompt]
+foreground = 'blue'
+background = 'transparent'
+template = '❯❯ '
