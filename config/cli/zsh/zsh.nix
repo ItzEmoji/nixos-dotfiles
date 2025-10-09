@@ -1,30 +1,18 @@
 { config, pkgs, ... }:
 
 {
-
-  imports = [
-    ../oh-my-posh/oh-my-posh.nix
-    ../atuin/atuin.nix
-    ../fzf/fzf.nix
-    ../zoxide/zoxide.nix
-  ];
   home.packages = with pkgs; [
      zinit
      eza
      bat
-     fzf
-     zoxide
-     oh-my-posh
-     atuin
+     zsh
      unimatrix    
      zinit
      eza
      bat
-     fzf
-     zoxide
-     oh-my-posh
-     atuin
+     gh
      unimatrix
+     fastfetch
    ];
   programs.zsh = {
     enable = true;

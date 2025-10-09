@@ -29,7 +29,10 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
             home-manager.users.cyril = {
               imports = [
                 ./home.nix
-                ./config/stylix/stylix-home-manager.nix
+                ./config/desktop/stylix/stylix-home-manager.nix
+                ./config/desktop/desktop.nix
+                ./config/cli/cli.nix
+                ./config/programs/programs.nix
                 inputs.spicetify-nix.homeManagerModules.default
               ];
             };

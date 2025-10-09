@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./config/stylix/stylix-system.nix
+    ./config/desktop/stylix/stylix-system.nix
   ];
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
@@ -69,6 +69,7 @@
   environment.systemPackages = with pkgs; [
     vim
     inputs.nix-alien.packages.${pkgs.system}.nix-alien
+    swww
     wget
     git
     zsh
