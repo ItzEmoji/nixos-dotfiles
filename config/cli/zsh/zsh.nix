@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   home.packages = with pkgs; [
      zinit
@@ -55,6 +54,7 @@
 
     # Add in zsh plugins
     zinit light zsh-users/zsh-syntax-highlighting
+    zinit ice atload="zicompinit"
     zinit light zsh-users/zsh-completions
     zinit light zsh-users/zsh-autosuggestions
     zinit light Aloxaf/fzf-tab
@@ -62,17 +62,14 @@
    # Add in snippets
    zinit snippet OMZP::command-not-found
 
-   # Shell integrations (fast version, replaces slow 'eval' calls)
    # These create small init scripts in your home dir for speed
-    zinit ice as"program" from"gh-r" atinit"zoxide init --cmd cd zsh >| ~/.zoxide.zsh"
-    zinit light "ajeetdsouza/zoxide"
-    zinit ice as"program" from"gh-r" atpull"oh-my-posh init zsh --config ~/.config/oh-my-posh/base.toml >| ~/.oh-my-posh.zsh"
-    zinit light "JanDeDobbeleer/oh-my-posh"
-    zinit ice as"program" from"gh-r" atinit"atuin init zsh >| ~/.atuin.zsh"
-    zinit light "atuinsh/atuin"
-
+    # zinit ice as"program" from"gh-r" atinit"zoxide init --cmd cd zsh >| ~/.zoxide.zsh"
+    # zinit light "ajeetdsouza/zoxide"
+    # zinit ice as"program" from"gh-r" atpull"oh-my-posh init zsh --config ~/.config/oh-my-posh/base.toml >| ~/.oh-my-posh.zsh"
+    # zinit light "JanDeDobbeleer/oh-my-posh"
+    # zinit ice as"program" from"gh-r" atinit"atuin init zsh >| ~/.atuin.zsh"
+    # zinit light "atuinsh/atuin"
     # Load completions
-    autoload -Uz compinit && compinit
     zinit cdreplay -q
 
     # Keybindings

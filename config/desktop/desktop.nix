@@ -6,5 +6,6 @@
     ./waybar/waybar.nix
     ./dunst/dunst.nix
     ./flameshot/flameshot.nix
+    ./mango/mango.nix
   ];
 }
