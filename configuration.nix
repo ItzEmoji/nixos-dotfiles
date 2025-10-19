@@ -29,6 +29,9 @@
   services.xserver = {
     enable = true;
     autoRepeatDelay = 200;
+    windowManager = {
+      i3.enable = true;
+    };
     autoRepeatInterval = 35;
     xkb.layout = "ch";
   };
@@ -64,7 +67,8 @@
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
   };
-
+  
+  programs.mango.enable = true;
   # System packages
   environment.systemPackages = with pkgs; [
     vim

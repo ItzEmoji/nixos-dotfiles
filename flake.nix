@@ -12,6 +12,8 @@
     nvim.url = "github:ItzEmoji/nvim";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+    mango.url = "github:DreamMaoMao/mango";
+    mango.inputs.nixpkgs.follows = "nixpkgs";
   };
 outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
     let
@@ -23,6 +25,7 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
+          inputs.mango.nixosModules.mango
           stylix.nixosModules.stylix
           {
             home-manager.extraSpecialArgs = { inherit inputs; };

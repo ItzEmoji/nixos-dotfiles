@@ -7,6 +7,7 @@
     "modules-center": [
         "custom/nix_logo",
         "hyprland/workspaces",
+        "ext/workspaces",
         "clock",
         "custom/user_menu"
     ],
@@ -14,7 +15,7 @@
     "modules-right": [],
 
     // --- Module Definitions ---
-    "hyprland/workspaces": {
+    "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
             "active": "",
@@ -23,6 +24,15 @@
         }
     },
 
+    
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "occupied": ""
+        }
+    },
     "custom/nix_logo": { "format": "", "tooltip": false },
     "clock": { "format": "{:%H:%M}" },
     "custom/user_menu": { "format": "😎" }
