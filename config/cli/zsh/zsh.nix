@@ -54,7 +54,6 @@
 
     # Add in zsh plugins
     zinit light zsh-users/zsh-syntax-highlighting
-    zinit ice atload="zicompinit"
     zinit light zsh-users/zsh-completions
     zinit light zsh-users/zsh-autosuggestions
     zinit light Aloxaf/fzf-tab
