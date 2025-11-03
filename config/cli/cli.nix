@@ -7,4 +7,5 @@
     ./zoxide/zoxide.nix
     ./atuin/atuin.nix
   ];
+  home.language.base = "en_US.UTF-8";
 }
