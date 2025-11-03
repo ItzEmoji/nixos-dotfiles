@@ -11,6 +11,10 @@
       nrs = "sudo nixos-rebuild switch --flake /home/cyril/dotfiles#cyril-nixos";
     };
   };
+  home.sessionVariables = {
+      LANG = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
+  };
 #  home.file.".config/nvim".source = ./config/nvim;
   home.file.".config/kitty".source = ./config/programs/kitty;
   home.file.".config/oh-my-posh".source = ./config/cli/oh-my-posh;
