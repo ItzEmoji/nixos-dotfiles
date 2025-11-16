@@ -6,6 +6,7 @@
     ./fzf/fzf.nix
     ./zoxide/zoxide.nix
     ./atuin/atuin.nix
+    ./fastfetch/fastfetch.nix
   ];
   home.language.base = "en_US.UTF-8";
 }
