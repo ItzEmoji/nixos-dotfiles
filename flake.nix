@@ -14,8 +14,10 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     mango.url = "github:DreamMaoMao/mango";
     mango.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
-outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -23,15 +25,15 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
       nixosConfigurations.cyril-nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
+          ./hosts/cyril-nixos/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
           inputs.mango.nixosModules.mango
-          stylix.nixosModules.stylix
+          inputs.stylix.nixosModules.stylix
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.cyril = {
               imports = [
-                ./home.nix
+                ./hosts/cyril-nixos/home.nix
                 ./config/desktop/stylix/stylix-home-manager.nix
                 ./config/desktop/desktop.nix
                 ./config/cli/cli.nix
@@ -45,19 +47,45 @@ outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
           }
         ];
       };
-      homeConfigurations.cyril = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.cyril = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
-          ./home.nix
-
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
+            home-manager.users.cyril = {
+              imports = [
+                ./home.nix
+                ./config/cli/cli.nix
+              ];
+            };
           }
         ];
+        nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          inherit system;
+          modules = [
+            inputs.nixos-wsl.nixosModules.default
+            inputs.home-manager.nixosModules.home-manager
+            ./hosts/wsl/configuration.nix
+            {
+              
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.cyril = {
+                imports = [
+                  ./hosts/wsl/home.nix
+                  ./config/cli/cli.nix
+                ];
+              };
+            }
+          ];
+
+        };
       };
     };
 }
