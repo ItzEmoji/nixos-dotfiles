@@ -47,6 +47,27 @@ outputs = { self, nixpkgs, ... }@inputs:
           }
         ];
       };
+      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        inherit system;
+        modules = [
+          ./hosts/wsl/configuration.nix
+          inputs.nixos-wsl.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.cyril = {
+              imports = [
+                ./hosts/wsl/home.nix
+                ./config/cli/cli.nix
+              ];
+            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+          }
+        ];
+      };
       homeConfigurations.cyril = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
@@ -64,29 +85,7 @@ outputs = { self, nixpkgs, ... }@inputs:
             };
           }
         ];
-        nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          inherit system;
-          modules = [
-            inputs.nixos-wsl.nixosModules.default
-            inputs.home-manager.nixosModules.home-manager
-            ./hosts/wsl/configuration.nix
-            {
-              
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.cyril = {
-                imports = [
-                  ./hosts/wsl/home.nix
-                  ./config/cli/cli.nix
-                ];
-              };
-            }
-          ];
-
         };
       };
-    };
 }
 
