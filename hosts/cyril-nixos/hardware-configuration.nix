@@ -8,27 +8,25 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c212bea6-2235-47c0-923a-ff18f08b04af";
+    { device = "/dev/disk/by-uuid/2c65493c-0a6d-4857-83a8-0293e1204f74";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/492E-D9AE";
+    { device = "/dev/disk/by-uuid/24AA-CE39";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/540660dd-c698-4669-a173-e924214a5a84"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -3,14 +3,14 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./config/desktop/stylix/stylix-system.nix
+    ../../config/desktop/stylix/stylix-system.nix
   ];
   # Bootloader
-  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.devices = [ "nodev" ];
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
@@ -25,7 +25,9 @@
     font = "Lat2-Terminus16";
     keyMap = "de_CH-latin1";
   };
-
+  programs.wireshark = {
+    enable = true;
+  };
   # Display Server
   services.xserver = {
     enable = true;
@@ -65,7 +67,7 @@
   # User Account
   users.users.cyril = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "wireguard" ];
     shell = pkgs.zsh;
   };
   
@@ -81,6 +83,7 @@
     waybar
     kitty
     file
+    wireshark
   ];
   # Fonts
   fonts.packages = with pkgs; [
