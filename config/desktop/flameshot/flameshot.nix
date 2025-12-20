@@ -1,0 +1,5 @@
+{ config, pkgs, ... }:
+{
+  home.file.".config/flameshot/flameshot.ini".source = ./flameshot.ini;
+  services.flameshot.enable = true;
+}
