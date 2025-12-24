@@ -17,7 +17,14 @@
 
   # Timezone
   time.timeZone = "Europe/Zurich";
+  hardware.graphics = {
+	enable = true;
+  };
 
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+  };
   # Locale
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "C.UTF-8/UTF-8" ];
@@ -37,6 +44,7 @@
     };
     autoRepeatInterval = 35;
     xkb.layout = "ch";
+    videoDrivers = ["nvidia"];
   };
   services.desktopManager.plasma6.enable = true;
   programs.hyprland.enable = true;
@@ -84,6 +92,7 @@
     kitty
     file
     wireshark
+    devbox
   ];
   # Fonts
   fonts.packages = with pkgs; [
