@@ -92,6 +92,7 @@
     kitty
     file
     wireshark
+    devbox
   ];
   # Fonts
   fonts.packages = with pkgs; [
