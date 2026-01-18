@@ -4,13 +4,6 @@
   home.username = "cyril";
   home.homeDirectory = "/home/cyril";
   home.stateVersion = "25.05";
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      c = "clear";
-      nrs = "sudo nixos-rebuild switch --flake /home/cyril/dotfiles#cyril-nixos";
-    };
-  };
   home.sessionVariables = {
       LANG = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
@@ -24,6 +17,7 @@
     vivaldi
     ripgrep
     cmatrix
+    bash
     cava
     pipes
     vesktop
@@ -39,3 +33,5 @@
     gh
   ];
 }
+
+
