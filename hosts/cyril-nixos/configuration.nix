@@ -6,6 +6,7 @@
     ../../config/desktop/stylix/stylix-system.nix
     ./grub.nix
   ];
+  programs.wayvnc.enable = true;
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
