@@ -4,16 +4,19 @@
   imports = [
     ./hardware-configuration.nix
     ../../config/desktop/stylix/stylix-system.nix
+    ./grub.nix
   ];
-  # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
+  programs.wayvnc.enable = true;
+  # Networking
+  services.tailscale.enable = true;
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 
   # Timezone
   time.timeZone = "Europe/Zurich";
@@ -53,6 +56,10 @@
     x11Support = true;
   };
   programs.ssh.startAgent = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
   
   programs.nix-ld.enable = true;
   # Miscellaneous
@@ -76,6 +83,10 @@
   users.users.cyril = {
     isNormalUser = true;
     extraGroups = [ "wheel" "wireguard" ];
+    openssh.authorizedKeys.keys = 
+    [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ6mkR7siw01qo8FPru7N5AyP9qkr3B1VtiERugolDz"
+    ];
     shell = pkgs.zsh;
   };
   
