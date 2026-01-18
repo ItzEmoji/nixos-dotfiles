@@ -12,6 +12,11 @@
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 
   # Timezone
   time.timeZone = "Europe/Zurich";
