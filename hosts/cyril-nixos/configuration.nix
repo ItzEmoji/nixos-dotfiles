@@ -7,6 +7,8 @@
     ./grub.nix
   ];
   programs.wayvnc.enable = true;
+  # Networking
+  services.tailscale.enable = true;
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
