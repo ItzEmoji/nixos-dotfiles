@@ -4,13 +4,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../config/desktop/stylix/stylix-system.nix
+    ./grub.nix
   ];
-  # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
 
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
