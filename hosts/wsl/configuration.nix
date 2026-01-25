@@ -13,6 +13,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  wsl.docker-desktop.enable = true;
   programs.ssh.startAgent = true;
   programs.zsh.enable = true;
   users.users.cyril = {
