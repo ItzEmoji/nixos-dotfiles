@@ -90,7 +90,6 @@
     shell = pkgs.zsh;
   };
   
-  programs.mango.enable = true;
   # System packages
   environment.systemPackages = with pkgs; [
     vim

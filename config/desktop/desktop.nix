@@ -6,7 +6,7 @@
     ./waybar/waybar.nix
     ./dunst/dunst.nix
     ./flameshot/flameshot.nix
-    ./mango/mango.nix
-    ./quickshell/quickshell.nix
+    # ./mango/mango.nix
+    # ./quickshell/quickshell.nix
   ];
 }
