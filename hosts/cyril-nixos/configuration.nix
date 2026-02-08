@@ -115,6 +115,7 @@
   environment.systemPackages = with pkgs; [
     vim
     obs-studio
+    cachix
     inputs.nix-alien.packages.${pkgs.system}.nix-alien
     swww
     wget
