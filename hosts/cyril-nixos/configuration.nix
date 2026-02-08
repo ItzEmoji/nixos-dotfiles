@@ -9,6 +9,10 @@
   programs.wayvnc.enable = true;
   # Networking
   services.tailscale.enable = true;
+  # Bluetooh
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
 
   nix = {
     settings = {
