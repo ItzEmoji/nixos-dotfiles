@@ -114,6 +114,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     vim
+    obs-studio
     inputs.nix-alien.packages.${pkgs.system}.nix-alien
     swww
     wget
