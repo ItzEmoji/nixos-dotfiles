@@ -10,6 +10,23 @@
   # Networking
   services.tailscale.enable = true;
 
+  nix = {
+    settings = {
+      # Substituter (Reihenfolge = Priorität)
+      substituters = [
+        "https://cache.itzemoji.com"
+      ];
+
+      # Trusted public keys
+      trusted-public-keys = [
+        "cache.itzemoji.com:jrwr7CYB1aPbhDlcaNfDYxGlgL13XlmieHcwOroewBM="
+      ];
+
+      # Gute Defaults
+      require-sigs = true;
+      fallback = true;
+    };
+  };
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
   # Virtualisation

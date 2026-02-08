@@ -1,5 +1,16 @@
 {
   description = "This is my NixOS Configuration";
+  nixConfig = {
+    substituters = [
+      "https://cache.itzemoji.com/nix"
+      "https://cache.nixos.org"
+    ];
+
+    trusted-public-keys = [
+      "cache.itzemoji.com/nix:xiCpklCqm9MDpLJIWSlL5YsKM0nULH7J389tvbX4UzE="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
+  };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
