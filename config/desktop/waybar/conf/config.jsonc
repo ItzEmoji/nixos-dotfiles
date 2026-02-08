@@ -7,22 +7,12 @@
     "modules-center": [
         "custom/nix_logo",
         "hyprland/workspaces",
-        "ext/workspaces",
         "clock",
         "custom/user_menu"
     ],
 
     "modules-right": [],
 
-    // --- Module Definitions ---
-    "ext/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "active": "",
-            "default": "",
-            "occupied": ""
-        }
-    },
 
     
     "hyprland/workspaces": {
