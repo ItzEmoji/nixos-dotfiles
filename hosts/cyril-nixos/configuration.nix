@@ -9,7 +9,28 @@
   programs.wayvnc.enable = true;
   # Networking
   services.tailscale.enable = true;
+  # Bluetooh
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
+
+  nix = {
+    settings = {
+      # Substituter (Reihenfolge = Priorität)
+      substituters = [
+        "https://cache.itzemoji.com"
+      ];
+
+      # Trusted public keys
+      trusted-public-keys = [
+        "cache.itzemoji.com:jrwr7CYB1aPbhDlcaNfDYxGlgL13XlmieHcwOroewBM="
+      ];
+
+      # Gute Defaults
+      require-sigs = true;
+      fallback = true;
+    };
+  };
   networking.hostName = "cyril-nixos";
   networking.networkmanager.enable = true;
   # Virtualisation
@@ -90,10 +111,11 @@
     shell = pkgs.zsh;
   };
   
-  programs.mango.enable = true;
   # System packages
   environment.systemPackages = with pkgs; [
     vim
+    obs-studio
+    cachix
     inputs.nix-alien.packages.${pkgs.system}.nix-alien
     swww
     wget
