@@ -13,6 +13,7 @@
       self.nixosModules.virtualisation
       self.nixosModules.fonts
       self.nixosModules.nh
+      self.nixosModules.kmscon
 
       # Services
       self.nixosModules.audio
