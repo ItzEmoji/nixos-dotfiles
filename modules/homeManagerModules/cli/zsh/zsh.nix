@@ -10,7 +10,6 @@
       home.packages = with pkgs; [
         zinit
         eza
-        bat
         zsh
         unimatrix
         gh
