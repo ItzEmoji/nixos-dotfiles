@@ -13,6 +13,7 @@
         gcc
         ncurses
         fastfetch
+        self.packages.${pkgs.system}.tmux
         self.packages.${pkgs.system}.bat
       ];
     };
@@ -20,6 +21,7 @@
     { pkgs, self, ... }:
     {
       home.packages = [
+        self.packages.${pkgs.system}.tmux
         self.packages.${pkgs.system}.bat
       ];
     };
