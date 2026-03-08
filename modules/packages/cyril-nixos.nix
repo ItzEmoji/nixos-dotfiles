@@ -11,6 +11,8 @@
         inputs.nix-alien.packages.${pkgs.system}.nix-alien
         swww
         wireshark
+        self.packages.${pkgs.system}.tmux
+        self.packages.${pkgs.system}.bat
       ];
       programs = {
         wireshark.enable = true;
@@ -26,6 +28,8 @@
         obs-studio
         vesktop
         vivaldi
+        self.packages.${pkgs.system}.tmux
+        self.packages.${pkgs.system}.bat
       ];
       programs = {
       };
