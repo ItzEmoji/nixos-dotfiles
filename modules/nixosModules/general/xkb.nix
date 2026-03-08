@@ -1,8 +1,10 @@
 { ... }:
 {
-  flake.nixosModules.xkb = { ... }: {
-    services.xserver.xkb = {
+  flake.nixosModules.xkb =
+    { ... }:
+    {
+      services.xserver.xkb = {
         layout = "ch";
+      };
     };
-  };
 }
