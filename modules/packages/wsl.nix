@@ -4,6 +4,7 @@
     {
       pkgs,
       inputs,
+      self,
       ...
     }:
     {
@@ -12,12 +13,16 @@
         gcc
         ncurses
         fastfetch
+        self.packages.${pkgs.system}.tmux
+        self.packages.${pkgs.system}.bat
       ];
     };
   flake.homeManagerModules.packages-wsl =
-    { pkgs, ... }:
+    { pkgs, self, ... }:
     {
-      home.packages = with pkgs; [
+      home.packages = [
+        self.packages.${pkgs.system}.tmux
+        self.packages.${pkgs.system}.bat
       ];
     };
 }

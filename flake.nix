@@ -7,13 +7,14 @@
     ];
 
     trusted-public-keys = [
-      "cache.itzemoji.com/nix:xiCpklCqm9MDpLJIWSlL5YsKM0nULH7J389tvbX4UzE="
+      "nix:U22mA6l/Br6W9STnaHWO2LPvUCNVuh1yTEIlTCtjtkg="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
   };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:nix-community/stylix";
