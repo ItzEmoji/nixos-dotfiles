@@ -37,8 +37,8 @@
         self.homeManagerModules.dunst
         self.homeManagerModules.flameshot
         self.homeManagerModules.hypr
+        self.homeManagerModules.noctalia
         self.homeManagerModules.rofi
-        self.homeManagerModules.waybar
         self.homeManagerModules.stylix-hm
 
         # Packages
