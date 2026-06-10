@@ -41,11 +41,8 @@
         self.homeManagerModules.waybar
         self.homeManagerModules.stylix-hm
 
-        # Programs
-        self.homeManagerModules.spicetify
         self.homeManagerModules.foot
         self.homeManagerModules.kitty
-
         # Packages
         self.homeManagerModules.packages-global
         self.homeManagerModules.packages-cyril-nixos
