@@ -10,6 +10,7 @@
     {
       environment.systemPackages = with pkgs; [
         inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
+        self.packages.${pkgs.stdenv.hostPlatform.system}.rio
         wireshark
       ];
       programs = {
