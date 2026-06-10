@@ -14,9 +14,9 @@
         enable = true;
       };
 
-      home.file.".config/hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
       home.file.".config/hypr/hyprlock.conf".source = ./hyprlock/hyprlock.conf;
-      home.file.".config/hypr/hyprland/conf".source = ./hyprland/conf;
       home.file.".config/hypr/hyprlock/conf".source = ./hyprlock/conf;
+      home.file.".config/hypr/hyprland.lua".source = ./hyprland/hyprland.lua;
+      home.file.".config/hypr/hyprland".source = ./hyprland/conf;
     };
 }
