@@ -41,7 +41,6 @@
         self.homeManagerModules.waybar
         self.homeManagerModules.stylix-hm
 
-        self.homeManagerModules.foot
         self.homeManagerModules.kitty
         # Packages
         self.homeManagerModules.packages-global
