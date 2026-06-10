@@ -25,13 +25,13 @@
 
         # CLI
         self.homeManagerModules.zsh
-        self.homeManagerModules.ssh-agent
         self.homeManagerModules.oh-my-posh
         self.homeManagerModules.fzf
         self.homeManagerModules.zoxide
         self.homeManagerModules.atuin
         self.homeManagerModules.fastfetch
         self.homeManagerModules.carapace
+        self.homeManagerModules.ssh-agent
 
         # Desktop
         self.homeManagerModules.dunst
