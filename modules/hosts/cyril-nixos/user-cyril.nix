@@ -31,7 +31,6 @@
         self.homeManagerModules.zoxide
         self.homeManagerModules.atuin
         self.homeManagerModules.fastfetch
-        self.homeManagerModules.tmux
         self.homeManagerModules.carapace
 
         # Desktop

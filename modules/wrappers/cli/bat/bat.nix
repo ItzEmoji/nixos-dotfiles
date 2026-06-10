@@ -3,17 +3,17 @@
   imports = [
     inputs.wrappers.flakeModules.wrappers
   ];
-    flake.wrappers.bat =
-       { wlib, pkgs, ... }:
-       {
-         imports = [ wlib.modules.default ];
+  flake.wrappers.bat =
+    { wlib, pkgs, ... }:
+    {
+      imports = [ wlib.modules.default ];
 
-          config.package = pkgs.bat;
+      config.package = pkgs.bat;
 
-          config.flags = {
-            "--style" = "plain";
-            "--paging" = "never";
-            "--theme" = "Catppuccin Mocha";
-          };
+      config.flags = {
+        "--style" = "plain";
+        "--paging" = "never";
+        "--theme" = "Catppuccin Mocha";
       };
+    };
 }

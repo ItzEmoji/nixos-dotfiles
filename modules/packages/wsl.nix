@@ -13,16 +13,16 @@
         gcc
         ncurses
         fastfetch
-        self.packages.${pkgs.system}.tmux
-        self.packages.${pkgs.system}.bat
+        self.packages.${pkgs.stdenv.hostPlatform.system}.tmux
+        self.packages.${pkgs.stdenv.hostPlatform.system}.bat
       ];
     };
   flake.homeManagerModules.packages-wsl =
     { pkgs, self, ... }:
     {
       home.packages = [
-        self.packages.${pkgs.system}.tmux
-        self.packages.${pkgs.system}.bat
+        self.packages.${pkgs.stdenv.hostPlatform.system}.tmux
+        self.packages.${pkgs.stdenv.hostPlatform.system}.bat
       ];
     };
 }
