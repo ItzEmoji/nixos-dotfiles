@@ -4,12 +4,13 @@
     {
       config,
       pkgs,
+      self,
       ...
     }:
     {
       programs.oh-my-posh = {
         enable = true;
-        settings = builtins.fromJSON (builtins.readFile ./config.json);
+        package = self.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-posh;
       };
     };
 }

@@ -1,0 +1,67 @@
+final_space = true
+version = 3
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+
+	
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground = "white"
+template = "╭─"
+[[blocks.segments]]
+template = " {{ .UserName }}"
+foreground = "cyan"
+type = "session"
+
+[[blocks.segments]]
+type = "text"
+style = "plain"
+template = "─"
+foreground = "white"
+[blocks.segments.properties]
+cache_duration = "none"
+
+[[blocks.segments]]
+template = " {{ .Path }}"
+foreground = "green"
+type = "path"
+
+[blocks.segments.properties]
+cache_duration = "none"
+style = "folder"
+
+[[blocks.segments]]
+template = "<white>─<yellow>󰔚 {{ .FormattedMs }}"
+type = "executiontime"
+[blocks.segments.properties]
+cache_duration = "none"
+style = "austin"
+threshold = 150
+[[blocks.segments]]
+type = "status"
+style = "plain"
+template = "<white>─<red> [{{ .Code }}] "
+
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+[[blocks.segments]]
+template =  "╰─"
+foreground = "white"
+type = "text"
+
+[blocks.segments.properties]
+cache_duration = "none"
+
+[secondary_prompt]
+background = "transparent"
+template = " "
+[transient_prompt]
+background = 'transparent'
+template = "═"
