@@ -14,6 +14,7 @@
       self.nixosModules.fonts
       self.nixosModules.nh
       self.nixosModules.kmscon
+      self.nixosModules.nix-cache
 
       # Services
       self.nixosModules.audio
