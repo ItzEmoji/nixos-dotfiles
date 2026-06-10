@@ -3,17 +3,20 @@
   imports = [
     inputs.wrappers.flakeModules.wrappers
   ];
-  flake.wrappers.bat =
+
+  flake.wrappers.kitty =
     { wlib, pkgs, ... }:
+
+    let
+      kittyConf = pkgs.writeText "kitty.conf" (builtins.readFile ./kitty.conf);
+    in
     {
       imports = [ wlib.modules.default ];
 
-      config.package = pkgs.bat;
+      config.package = pkgs.kitty;
 
       config.flags = {
-        "--style" = "plain";
-        "--paging" = "never";
-        "--theme" = "Catppuccin Mocha";
+        "--config" = kittyConf;
       };
     };
 }

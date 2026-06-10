@@ -3,17 +3,20 @@
   imports = [
     inputs.wrappers.flakeModules.wrappers
   ];
-  flake.wrappers.bat =
+
+  flake.wrappers.foot =
     { wlib, pkgs, ... }:
+
+    let
+      footConf = pkgs.writeText "foot.ini" (builtins.readFile ./foot.ini);
+    in
     {
       imports = [ wlib.modules.default ];
 
-      config.package = pkgs.bat;
+      config.package = pkgs.foot;
 
       config.flags = {
-        "--style" = "plain";
-        "--paging" = "never";
-        "--theme" = "Catppuccin Mocha";
+        "--config" = footConf;
       };
     };
 }

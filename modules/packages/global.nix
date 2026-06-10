@@ -1,11 +1,19 @@
 { ... }:
 {
   flake.nixosModules.packages-global =
-    { pkgs, inputs, ... }:
+    {
+      pkgs,
+      inputs,
+      self,
+      ...
+    }:
     {
       environment.systemPackages = with pkgs; [
-        inputs.nix-alien.packages.${pkgs.system}.nix-alien
+        inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
+
         vim
+        self.packages.${pkgs.stdenv.hostPlatform.system}.tmux
+        self.packages.${pkgs.stdenv.hostPlatform.system}.bat
         git
         wget
         file
@@ -18,10 +26,12 @@
     };
 
   flake.homeManagerModules.packages-global =
-    { pkgs, ... }:
+    { pkgs, self, ... }:
     {
       home.packages = with pkgs; [
         btop
+        self.packages.${pkgs.stdenv.hostPlatform.system}.tmux
+        self.packages.${pkgs.stdenv.hostPlatform.system}.bat
         jq
         ripgrep
         cmatrix

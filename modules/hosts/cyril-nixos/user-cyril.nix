@@ -25,27 +25,21 @@
 
         # CLI
         self.homeManagerModules.zsh
-        self.homeManagerModules.ssh-agent
         self.homeManagerModules.oh-my-posh
         self.homeManagerModules.fzf
         self.homeManagerModules.zoxide
         self.homeManagerModules.atuin
         self.homeManagerModules.fastfetch
-        self.homeManagerModules.tmux
         self.homeManagerModules.carapace
+        self.homeManagerModules.ssh-agent
 
         # Desktop
         self.homeManagerModules.dunst
         self.homeManagerModules.flameshot
         self.homeManagerModules.hypr
+        self.homeManagerModules.noctalia
         self.homeManagerModules.rofi
-        self.homeManagerModules.waybar
         self.homeManagerModules.stylix-hm
-
-        # Programs
-        self.homeManagerModules.spicetify
-        self.homeManagerModules.foot
-        self.homeManagerModules.kitty
 
         # Packages
         self.homeManagerModules.packages-global

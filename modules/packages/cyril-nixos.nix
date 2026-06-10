@@ -3,16 +3,15 @@
   flake.nixosModules.packages-cyril-nixos =
     {
       pkgs,
+      self,
       inputs,
       ...
     }:
     {
       environment.systemPackages = with pkgs; [
-        inputs.nix-alien.packages.${pkgs.system}.nix-alien
-        swww
+        inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
+        self.packages.${pkgs.stdenv.hostPlatform.system}.rio
         wireshark
-        self.packages.${pkgs.system}.tmux
-        self.packages.${pkgs.system}.bat
       ];
       programs = {
         wireshark.enable = true;
@@ -20,7 +19,7 @@
       };
     };
   flake.homeManagerModules.packages-cyril-nixos =
-    { pkgs, ... }:
+    { pkgs, self, ... }:
     {
       home.packages = with pkgs; [
         devbox
@@ -28,8 +27,6 @@
         obs-studio
         vesktop
         vivaldi
-        self.packages.${pkgs.system}.tmux
-        self.packages.${pkgs.system}.bat
       ];
       programs = {
       };
