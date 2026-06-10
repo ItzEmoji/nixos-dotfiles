@@ -5,7 +5,7 @@
     {
       services.kmscon = {
         enable = true;
-        hwRender = true;
+        config.hwaccel = true;
         useXkbConfig = true;
         # fonts = [
         #   {
