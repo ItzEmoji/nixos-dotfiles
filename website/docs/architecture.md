@@ -25,11 +25,15 @@ site is discovered this way; there is no central list to keep in sync.
 ## The module registry convention
 
 Instead of writing NixOS/home-manager configuration inline in a host's config, almost
-every module in this repo publishes itself into one of two flake-parts options declared
-in `modules/options.nix`:
+every module in this repo publishes itself into one of two registries:
 
-- `flake.nixosModules.<name>` — a NixOS module, later consumed as `self.nixosModules.<name>`
-- `flake.homeManagerModules.<name>` — a home-manager module, consumed as `self.homeManagerModules.<name>`
+- `flake.nixosModules.<name>` — a NixOS module, later consumed as `self.nixosModules.<name>`.
+  This option is provided by flake-parts itself upstream; this repo doesn't declare it, it
+  just uses it by convention.
+- `flake.homeManagerModules.<name>` — a home-manager module, consumed as
+  `self.homeManagerModules.<name>`. Unlike the above, this one **is** an option this repo
+  declares itself, in `modules/options.nix` — which is also why
+  [Reference → Options](/reference/options) only lists a single option.
 
 A minimal example — this is the *entire* file that enables Tailscale on any host that
 imports it:

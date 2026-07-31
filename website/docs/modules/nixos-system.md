@@ -29,8 +29,9 @@ that aren't desktop-specific.
 
 :::info Duplicate registration
 `modules/nixosModules/config/xkb.nix` and `modules/nixosModules/general/xkb.nix` both
-register `flake.nixosModules.xkb` with the same content — one silently shadows the
-other. Harmless today since both set the same value, but worth cleaning up.
+register `flake.nixosModules.xkb`. The module system merges both definitions rather
+than one shadowing the other — harmless here since they set the identical value, but
+worth cleaning up.
 :::
 
 ## base-system

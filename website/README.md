@@ -28,16 +28,13 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-Using SSH:
+This site is deployed by the `.github/workflows/docs.yaml` GitHub Actions workflow,
+which is triggered manually from the Actions tab (`workflow_dispatch`). It builds the
+site and publishes it to GitHub Pages via `actions/deploy-pages` (custom domain
+configured via `static/CNAME`) — there is no `gh-pages` branch or `npm run deploy` step.
+
+Before rebuilding, regenerate the options reference page from the current flake state:
 
 ```bash
-USE_SSH=true npm run deploy
+../scripts/gen-options.sh
 ```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> npm run deploy
-```
-
-If you are using GitHub Pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

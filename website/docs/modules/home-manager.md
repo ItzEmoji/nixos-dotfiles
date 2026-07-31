@@ -27,10 +27,13 @@ import SshAgent from '!!raw-loader!../../../modules/homeManagerModules/services/
 `self.homeManagerModules.*` entries — per-user configuration and dotfiles.
 
 :::info Duplicate registration
-`modules/homeManagerModules/base.nix` also registers `flake.nixosModules.home-manager`
-(identical in substance to `modules/nixosModules/config/home-manager.nix`, see
-[NixOS — System](/modules/nixos-system)) — another spot where the same registry name
-gets declared twice.
+`modules/homeManagerModules/base.nix` also registers `flake.nixosModules.home-manager`,
+alongside [NixOS — System](/modules/nixos-system)'s
+`modules/nixosModules/config/home-manager.nix` — but the two are **not** identical:
+the `config/home-manager.nix` version additionally imports the upstream
+`inputs.home-manager.nixosModules.home-manager` module and passes `self` through
+`extraSpecialArgs`, while the `base.nix` version does neither. Don't remove one
+assuming it's a safe-to-delete duplicate.
 :::
 
 ## home (base)
