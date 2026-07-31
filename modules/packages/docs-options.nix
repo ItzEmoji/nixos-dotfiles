@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -23,5 +23,9 @@
     in
     {
       packages.docsOptionsJSON = optionsDoc.optionsJSON;
+      # Expose the ndg flake input's own package so scripts/gen-options.sh can run it via
+      # `nix run .#ndg`, pinned to the flake.lock revision, instead of an unpinned
+      # `nix run github:feel-co/ndg` that would float to whatever's latest on each run.
+      packages.ndg = inputs.ndg.packages.${pkgs.system}.default;
     };
 }
