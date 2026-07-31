@@ -4,7 +4,7 @@
 terminal = "rio"
 fileManager = "dolphin"
 browser = "vivaldi"
-ipc = "noctalia ipc call "
+ipc = "noctalia msg "
 home = os.getenv("HOME")
 color_cache_file = home .. "/.local/cache/noctalia/hyprland-colors.lua"
 theme = dofile(color_cache_file)
