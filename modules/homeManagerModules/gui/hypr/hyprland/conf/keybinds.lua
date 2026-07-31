@@ -14,9 +14,8 @@ bind(
 )
 bind(mainMod .. " + F", exec_cmd(fileManager))
 bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-bind(mainMod .. " + SPACE", exec_cmd(ipc .. "launcher toggle"))
+bind(mainMod .. " + SPACE", exec_cmd(ipc .. "panel-toggle launcher"))
 bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd("[float; size 1200 800; center] " .. terminal))
-bind(mainMod .. " + W", exec_cmd(ipc .. "wallpaper toggle"))
 bind(mainMod .. " + B", exec_cmd(browser))
 
 -- Move focus with mainMod + arrow keys
