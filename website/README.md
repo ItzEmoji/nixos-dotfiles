@@ -8,7 +8,10 @@ This website is built using [Docusaurus](https://docusaurus.io/), a modern stati
 bun install
 ```
 
-**Note**: feel free to use the package manager of your choice.
+**Note**: this project uses [bun](https://bun.sh/) specifically — `bun.lock` is
+committed and CI runs `bun install --frozen-lockfile`, so installing with a
+different package manager would regenerate a `package-lock.json`/`yarn.lock`
+and drift from what CI actually uses.
 
 ## Local Development
 
@@ -33,8 +36,9 @@ which is triggered manually from the Actions tab (`workflow_dispatch`). It build
 site and publishes it to GitHub Pages via `actions/deploy-pages` (custom domain
 configured via `static/CNAME`) — there is no `gh-pages` branch or `npm run deploy` step.
 
-Before rebuilding, regenerate the options reference page from the current flake state:
+Before rebuilding, regenerate the options reference pages from the current flake state:
 
 ```bash
 ../scripts/gen-options.sh
+bun run ../scripts/gen-configured-options.js
 ```
