@@ -1,3 +1,6 @@
 secrets.nix
 config/grub/grub.nix
 config/grub/themes/*
+
+# Superpowers skill-internal working files (specs, plans) - never committed
+docs/superpowers/
