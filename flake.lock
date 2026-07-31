@@ -682,6 +682,26 @@
     "ndg": {
       "inputs": {
         "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785222356,
+        "narHash": "sha256-I82aD2ktjv/EvxKuoi5Tp+AoFWtn1NvNWRmG0YFT0us=",
+        "owner": "feel-co",
+        "repo": "ndg",
+        "rev": "046be6daf4bef4d1aa7856b8cf921a2db2830ea5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "ndg",
+        "type": "github"
+      }
+    },
+    "ndg_2": {
+      "inputs": {
+        "nixpkgs": [
           "nvim",
           "nvf",
           "nixpkgs"
@@ -943,7 +963,7 @@
         "flake-compat": "flake-compat_4",
         "flake-parts": "flake-parts_3",
         "mnw": "mnw",
-        "ndg": "ndg",
+        "ndg": "ndg_2",
         "nixpkgs": [
           "nvim",
           "nixpkgs"
@@ -1014,6 +1034,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "import-tree": "import-tree",
+        "ndg": "ndg",
         "nix-alien": "nix-alien",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
