@@ -60,11 +60,28 @@ function main() {
       if (category === 'Other') continue;
       const source = fs.readFileSync(file, 'utf8');
       for (const { registry, name, bodyText } of findModuleAssignments(source)) {
+        const label = moduleLabel(registry, name);
+        if (bodyText === null) {
+          console.warn(
+            `[gen-configured-options] ${relPath}: could not parse the body of ` +
+            `flake.${label} (not a recognizable "{ args }: { ... }" module ` +
+            `lambda) — skipping it rather than emitting rows for it.`
+          );
+          continue;
+        }
         for (const row of extractConfigRows(bodyText, { maxDepth: 4 })) {
+          if (row.path.endsWith('<unparsed>')) {
+            console.warn(
+              `[gen-configured-options] ${relPath}: could not fully parse an ` +
+              `attrset in flake.${label} at "${row.path}" (likely an ` +
+              `\`inherit ...;\` or other non-"key = value;" statement) — ` +
+              `emitting the remainder as a single blob row instead of dropping it.`
+            );
+          }
           byCategory.get(category).push({
             path: row.path,
             value: row.value,
-            module: moduleLabel(registry, name),
+            module: label,
           });
         }
       }
@@ -82,12 +99,15 @@ function main() {
   lines.push('# Configured Options');
   lines.push('');
   lines.push(
-    "Every concrete option value this repo's modules actually set, extracted " +
-    "directly from source (no Nix evaluation). This is a different question " +
-    "from [Options](./options) (the ndg-generated page, which only documents " +
-    "formally declared `mkOption`s — of which this repo has exactly one): " +
-    "this page shows every upstream NixOS/home-manager option this repo " +
-    "assigns a value to, however it does it. Regenerate with " +
+    "Every concrete option value set by this repo's reusable module tree " +
+    "(`modules/nixosModules`, `modules/homeManagerModules`, `modules/wrappers`, " +
+    "`modules/packages`), extracted directly from source (no Nix evaluation). " +
+    "Per-host user/system config (`modules/hosts`) is covered on the Hosts " +
+    "pages instead. This is a different question from [Options](./options) " +
+    "(the ndg-generated page, which only documents formally declared " +
+    "`mkOption`s — of which this repo has exactly one): this page shows every " +
+    "upstream NixOS/home-manager option this repo's reusable modules assign a " +
+    "value to, however they do it. Regenerate with " +
     "`bun run scripts/gen-configured-options.js`."
   );
   lines.push('');

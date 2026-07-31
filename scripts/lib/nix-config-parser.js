@@ -170,16 +170,29 @@ function scanValueToTerminator(text, start, terminator) {
   return j;
 }
 
+// Parses a sequence of `key = value;` statements out of `bodyText`. Stops
+// as soon as it hits a statement it can't recognize as `key = value;` — most
+// notably an `inherit foo;` / `inherit (pkg) foo bar;` statement, which has
+// no `=`. Returns both the entries successfully parsed AND whatever
+// non-whitespace text is left starting from the statement that broke
+// parsing, so callers can surface it instead of silently losing it (see
+// `extractConfigRows`, which turns non-empty `unparsed` into a visible blob
+// row rather than dropping the rest of the attrset on the floor).
 function parseAttrsetEntries(bodyText) {
   const entries = [];
   let i = 0;
   while (true) {
     i = skipWhitespaceAndComments(bodyText, i);
-    if (i >= bodyText.length) break;
+    if (i >= bodyText.length) return { entries, unparsed: '' };
+    const stmtStart = i;
     const { path, next } = parseKey(bodyText, i);
-    if (path.length === 0) break;
+    if (path.length === 0) {
+      return { entries, unparsed: bodyText.slice(stmtStart).trim() };
+    }
     let k = skipWhitespaceAndComments(bodyText, next);
-    if (bodyText[k] !== '=') break;
+    if (bodyText[k] !== '=') {
+      return { entries, unparsed: bodyText.slice(stmtStart).trim() };
+    }
     k++;
     const valueStart = skipWhitespaceAndComments(bodyText, k);
     const valueEnd = scanValueToTerminator(bodyText, valueStart, ';');
@@ -187,7 +200,6 @@ function parseAttrsetEntries(bodyText) {
     entries.push({ key: path.join('.'), valueText });
     i = valueEnd + 1;
   }
-  return entries;
 }
 
 function valueIsAttrsetLiteral(valueText) {
@@ -205,7 +217,7 @@ function extractConfigRows(bodyText, opts = {}) {
   const maxDepth = opts.maxDepth === undefined ? 4 : opts.maxDepth;
   const rows = [];
   function walk(text, prefix, depth) {
-    const entries = parseAttrsetEntries(text);
+    const { entries, unparsed } = parseAttrsetEntries(text);
     for (const { key, valueText } of entries) {
       if (key === 'imports') continue;
       const path = prefix ? `${prefix}.${key}` : key;
@@ -216,6 +228,14 @@ function extractConfigRows(bodyText, opts = {}) {
       } else {
         rows.push({ path, value: collapseWhitespace(valueText) });
       }
+    }
+    // `parseAttrsetEntries` stopped early (e.g. hit an `inherit ...;`
+    // statement it can't parse as `key = value;`). Rather than silently
+    // dropping the remainder of this attrset, surface it as one visible
+    // blob row so it still shows up in the generated table.
+    if (unparsed) {
+      const path = prefix ? `${prefix}.<unparsed>` : '<unparsed>';
+      rows.push({ path, value: collapseWhitespace(unparsed) });
     }
   }
   walk(bodyText, '', 0);
@@ -281,6 +301,13 @@ function findModuleAssignments(fileText) {
       const rhsStart = skipWhitespaceAndComments(fileText, i);
       const rhsEnd = scanValueToTerminator(fileText, rhsStart, ';');
       const rhs = fileText.slice(rhsStart, rhsEnd).trim();
+      // We recognize the standard `{ args }: { body }` module-lambda shape.
+      // Anything else (e.g. a reference to an existing binding, a function
+      // call, or some other expression) is NOT silently skipped — it's
+      // still recorded, with `bodyText: null`, so a caller like
+      // gen-configured-options.js can warn about it by name instead of the
+      // registration just vanishing with no signal.
+      let bodyText = null;
       if (rhs[0] === '{') {
         const argsClose = findMatchingClose(rhs, 0);
         const k = skipWhitespaceAndComments(rhs, argsClose + 1);
@@ -289,10 +316,11 @@ function findModuleAssignments(fileText) {
           body = unwrapLetIn(body);
           if (body[0] === '{') {
             const bodyClose = findMatchingClose(body, 0);
-            results.push({ registry, name, bodyText: body.slice(1, bodyClose) });
+            bodyText = body.slice(1, bodyClose);
           }
         }
       }
+      results.push({ registry, name, bodyText });
       searchFrom = rhsEnd + 1;
     }
   }

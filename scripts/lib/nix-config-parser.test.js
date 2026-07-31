@@ -136,6 +136,39 @@ describe('extractConfigRows', () => {
       'programs.zsh.enableCompletion',
     ]);
   });
+
+  test('surfaces an inherit-only nested attrset as a visible blob row instead of dropping it (real home-manager.nix pattern)', () => {
+    // Matches modules/nixosModules/config/home-manager.nix and
+    // modules/homeManagerModules/base.nix: an `extraSpecialArgs` attrset
+    // whose only statement is `inherit ...;`, which has no `=` and so can't
+    // be parsed as `key = value;`. Previously this silently produced zero
+    // rows for the entire nested attrset; it must now show up somehow.
+    const body = [
+      'home-manager = {',
+      '  useGlobalPkgs = true;',
+      '  extraSpecialArgs = { inherit inputs self; };',
+      '};',
+    ].join('\n');
+    const rows = extractConfigRows(body);
+    expect(rows).toContainEqual({ path: 'home-manager.useGlobalPkgs', value: 'true' });
+    const unparsedRow = rows.find((r) => r.path.startsWith('home-manager.extraSpecialArgs'));
+    expect(unparsedRow).toBeDefined();
+    expect(unparsedRow.path).toBe('home-manager.extraSpecialArgs.<unparsed>');
+    expect(unparsedRow.value).toContain('inherit inputs self;');
+  });
+
+  test('surfaces a top-level inherit statement as a visible blob row rather than dropping everything after it', () => {
+    // The review's hypothetical worst case: an `inherit` line near the top
+    // of an attrset must not silently swallow every entry that follows it.
+    const body = [
+      'inherit (pkgs) foo;',
+      'services.tailscale.enable = true;',
+    ].join('\n');
+    const rows = extractConfigRows(body);
+    expect(rows).toHaveLength(1);
+    expect(rows[0].path).toBe('<unparsed>');
+    expect(rows[0].value).toContain('inherit (pkgs) foo;');
+  });
 });
 
 describe('findModuleAssignments', () => {
@@ -206,5 +239,19 @@ describe('findModuleAssignments', () => {
       { path: 'config.package', value: 'pkgs.tmux' },
       { path: 'config.flags."-f"', value: 'tmuxConf' },
     ]);
+  });
+
+  test('records a registration with bodyText: null instead of silently dropping it when the RHS is not a recognizable "{ args }: { body }" lambda', () => {
+    const file = [
+      '{ ... }:',
+      '{',
+      '  flake.nixosModules.aliased = someExistingBinding;',
+      '}',
+    ].join('\n');
+    const found = findModuleAssignments(file);
+    expect(found).toHaveLength(1);
+    expect(found[0].registry).toBe('nixosModules');
+    expect(found[0].name).toBe('aliased');
+    expect(found[0].bodyText).toBeNull();
   });
 });

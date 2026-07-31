@@ -7,7 +7,7 @@ sidebar_position: 2
 
 # Configured Options
 
-Every concrete option value this repo's modules actually set, extracted directly from source (no Nix evaluation). This is a different question from [Options](./options) (the ndg-generated page, which only documents formally declared `mkOption`s — of which this repo has exactly one): this page shows every upstream NixOS/home-manager option this repo assigns a value to, however it does it. Regenerate with `bun run scripts/gen-configured-options.js`.
+Every concrete option value set by this repo's reusable module tree (`modules/nixosModules`, `modules/homeManagerModules`, `modules/wrappers`, `modules/packages`), extracted directly from source (no Nix evaluation). Per-host user/system config (`modules/hosts`) is covered on the Hosts pages instead. This is a different question from [Options](./options) (the ndg-generated page, which only documents formally declared `mkOption`s — of which this repo has exactly one): this page shows every upstream NixOS/home-manager option this repo's reusable modules assign a value to, however they do it. Regenerate with `bun run scripts/gen-configured-options.js`.
 
 ## NixOS System
 
@@ -22,6 +22,7 @@ Every concrete option value this repo's modules actually set, extracted directly
 | `fonts.packages` | `with pkgs; [ nerd-fonts.jetbrains-mono ]` | `nixosModules.fonts` |
 | `hardware.bluetooth.enable` | `true` | `nixosModules.bluetooth` |
 | `home-manager.backupFileExtension` | `"backup"` | `nixosModules.home-manager` |
+| `home-manager.extraSpecialArgs.<unparsed>` | `inherit inputs self;` | `nixosModules.home-manager` |
 | `home-manager.useGlobalPkgs` | `true` | `nixosModules.home-manager` |
 | `home-manager.useUserPackages` | `true` | `nixosModules.home-manager` |
 | `i18n.defaultLocale` | `"en_US.UTF-8"` | `nixosModules.base-system` |
@@ -90,6 +91,7 @@ Every concrete option value this repo's modules actually set, extracted directly
 | Option path | Value | Set in |
 |---|---|---|
 | `home-manager.backupFileExtension` | `"backup"` | `nixosModules.home-manager` |
+| `home-manager.extraSpecialArgs.<unparsed>` | `inherit inputs;` | `nixosModules.home-manager` |
 | `home-manager.useGlobalPkgs` | `true` | `nixosModules.home-manager` |
 | `home-manager.useUserPackages` | `true` | `nixosModules.home-manager` |
 | `home.file.".config/dunst".source` | `./dunst/conf` | `homeManagerModules.dunst` |
