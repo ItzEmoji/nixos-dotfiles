@@ -30,7 +30,6 @@
         self.homeManagerModules.zoxide
         self.homeManagerModules.atuin
         self.homeManagerModules.fastfetch
-        self.homeManagerModules.carapace
         self.homeManagerModules.ssh-agent
 
         # Desktop
