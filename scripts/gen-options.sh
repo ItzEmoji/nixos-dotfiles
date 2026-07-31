@@ -20,6 +20,7 @@ nix build .#docsOptionsJSON -o result-options
 # (index/search/assets) is discarded since Docusaurus already provides that
 # site chrome itself.
 workdir="$(mktemp -d)"
+trap 'rm -rf "$workdir" result-options' EXIT
 
 nix run .#ndg -- html \
   --module-options result-options/share/doc/nixos/options.json \
@@ -50,6 +51,7 @@ extracted="$workdir/options-fragment.html"
 sed -n '/<div class="options-container">/,/<div class="footnotes-container">/p' "$workdir/options.html" \
   | sed '$d' \
   | sed -e 's#<html><head></head><body>##g' -e 's#</body></html>##g' \
+        -e 's#<span class="copy-link"[^>]*></span>##g' -e 's#<span class="copy-feedback">[^<]*</span>##g' \
   | sed -E 's#(<div class="option-description">)(<p>)#\1\n\2#g' \
   > "$extracted"
 
@@ -72,6 +74,3 @@ fi
   echo
   cat "$extracted"
 } > website/docs/reference/options.md
-
-rm -rf "$workdir"
-rm -f result-options

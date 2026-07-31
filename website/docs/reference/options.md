@@ -8,8 +8,8 @@ sidebar_position: 1
           <div class="options-container"><div class="option" id="option-flake.homeManagerModules">
   <h3 class="option-name">
     <a href="#option-flake.homeManagerModules" class="option-anchor">flake.homeManagerModules</a>
-    <span class="copy-link" title="Copy link to this option"></span>
-    <span class="copy-feedback">Link copied!</span>
+    
+    
   </h3>
   <div class="option-type">Type: <code>lazy attribute set of raw value</code></div>
   <div class="option-description">
