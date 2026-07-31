@@ -5,10 +5,10 @@
     {
       nix.settings = {
         substituters = [
-          "https://cache.itzemoji.com/nix"
+          "https://packages.itzemoji.com"
         ];
         trusted-public-keys = [
-          "nix:U22mA6l/Br6W9STnaHWO2LPvUCNVuh1yTEIlTCtjtkg="
+          "packages.itzemoji.com:AnGnY4m1zpWTt7B/lI+5ihAL0r0SR5pmsevZtJTexhQ="
         ];
       };
     };
