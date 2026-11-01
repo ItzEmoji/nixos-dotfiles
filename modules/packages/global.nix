@@ -49,7 +49,6 @@
         lua-language-server
         gh
         opencode
-        gemini-cli
       ];
       programs = {
       };
