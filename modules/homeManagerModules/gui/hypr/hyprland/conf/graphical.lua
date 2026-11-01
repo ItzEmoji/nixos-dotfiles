@@ -7,10 +7,6 @@ hl.config({
 		gaps_in = 5,
 		gaps_out = 20,
 		border_size = 2,
-		col = {
-			active_border = theme.border_active,
-			inactive_border = theme.border_inactive,
-		},
 		resize_on_border = false,
 		allow_tearing = false,
 		layout = "dwindle",
