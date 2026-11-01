@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/ItzEmoji/nixos-dotfiles/compare/v1.1.1...v1.1.2) (2026-11-01)
+
+
+### Bug Fixes
+
+* **hyperland:** fix ne variable handling ([07354d1](https://github.com/ItzEmoji/nixos-dotfiles/commit/07354d1c42aa2a45215bad5b4dc3fbb7145d1082))
+
 ## [1.1.1](https://github.com/ItzEmoji/nixos-dotfiles/compare/v1.1.0...v1.1.1) (2026-07-31)
 
 
